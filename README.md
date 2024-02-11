@@ -151,5 +151,5 @@ python3 picsocket_receiver 8888
 python3 picsocket_sender 127.0.0.1 8888
 ```
 
-<details>
+</details>
 
