@@ -31,7 +31,16 @@ sudo apt-get install libopencv-dev
 brew install opencv
 ```
 #### (2)编译安装
+克隆本仓库。
 ```sh
+cd ~
+git clone https://github.com/BestAnHongjun/PicSocket.git
+```
+
+编译并安装。
+
+```sh
+cd PicSocket
 mkdir build
 cd build
 cmake ..
@@ -47,14 +56,18 @@ make install # 不会安装到系统目录，安装到项目的install目录
     |- example  # 一个简易的demo
 ```
 
-将`include`文件夹和`lib`文件夹拷贝到你自己的工程中即可使用。为了演示使用方法，我们假设`example`就是您的工程目录。
+将`include`文件夹和`lib`文件夹拷贝到你自己的工程中即可使用。
+
+#### (3)在自定义工程中使用`PicSocket`
+
+为了演示使用方法，我们假设`example`就是您的工程目录。
 
 在您的工程目录下创建源码文件，如[picsocket_sender.cpp](./example/picsocket_sender.cpp)、[picsocket_receiver.cpp](./example/picsocket_receiver.cpp)。创建CMake文件，如[CMakeLists.txt](./example/CMakeLists.txt)。
 
 随后编译您的工程。
 
 ```sh
-cd install/example # 进入您的工程目录
+cd ~/PicSocket/install/example # 进入您的工程目录
 mkdir build     # 创建编译目录
 cd build
 cmake ..
