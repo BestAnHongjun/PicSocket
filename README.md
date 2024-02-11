@@ -1,5 +1,9 @@
 # PicSocket：轻量级局域网跨平台图传
 
+<div align="center">
+<img src="./attach/logo.jpg" width="800px">
+</div>
+
 ### 1.特性
 * 底层基于UDP协议，图传实时性强。
 * 可用于高清数字图传（测试可支持1080P）。
