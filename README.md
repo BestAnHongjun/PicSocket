@@ -153,3 +153,106 @@ python3 picsocket_sender 127.0.0.1 8888
 
 </details>
 
+### 3.简明教程
+
+#### (1)C/C++简明教程
+* 发送端
+```cpp
+// 0.引入头文件
+#include "pic_socket.h" 
+
+int main()
+{
+    // 1.OpenCV读取摄像头
+    cv::VideoCapture capture(0);
+
+    // 2.创建发送端实例，目标IP地址127.0.0.1，目标端口8888
+    UDPImgSender img_sender("127.0.0.1", 8888);
+
+    while (true)
+    {
+        // 3.读取OpenCV-Mat
+        cv::Mat frame;
+        capture >> frame;
+
+        // 4.发送一帧
+        img_sender.send(frame);
+
+        // 5.可视化当前帧
+        cv::imshow("sender", frame);
+        cv::waitKey(30);
+    }
+    
+    // 6.结束程序
+    return 0;
+}
+```
+
+* 接收端
+```cpp
+// 0.引入头文件
+#include "pic_socket.h"
+
+int main()
+{
+    // 1.创建接收端实例，接收端口8888
+    UDPImgReceiver img_receiver(8888);
+
+    while (true)
+	{
+		// 2.读取一帧
+        cv::Mat frame = img_receiver.read();
+
+        // 3.可视化当前帧
+		cv::imshow("receiver", frame);
+		cv::waitKey(30);
+	}
+
+    // 4.退出程序
+	return 0;
+ }
+```
+
+#### (1)Python简明教程
+* 发送端
+
+```py
+import cv2
+# 0.引入picsocket库
+import picsocket
+
+
+if __name__ == "__main__":
+    # 1.创建发送端实例，目标IP地址127.0.0.1，目标端口8888
+    img_sender = picsocket.ImgSender("127.0.0.1", 8888)
+
+    cap = cv2.VideoCapture(0)
+    while True:
+        # 2.读取OpenCV-Mat
+        ret, img = cap.read()
+        
+        # 3.发送一帧
+        img_sender.send(img)
+```
+
+* 接收端
+
+```py
+import cv2
+# 0.引入picsocket库
+import picsocket
+
+
+if __name__ == "__main__":
+    # 1.创建接收端实例，监听端口8888
+    img_receiver = picsocket.ImgReceiver(8888)
+
+    while True:
+        # 2.读取一帧
+        img = img_receiver.read()
+
+        # 3.可视化当前帧
+        cv2.imshow("receiver", img)
+        cv2.waitKey(5)
+
+```
