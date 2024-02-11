@@ -3,3 +3,4 @@ install
 .vscode
 .idea
 __pycache__
+picsocket.egg-info

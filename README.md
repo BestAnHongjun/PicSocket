@@ -6,10 +6,10 @@
 
 ### 1.特性
 * 底层基于UDP协议，图传实时性强。
-* 可用于高清数字图传（测试可支持1080P）。
+* 可用于高清数字图传（测试可支持1080P，100Mbps局域网下可达100+FPS）。
 * 可用于局域网wifi无线图传。
-* 跨平台，支持Windows，Linux及MacOS。
-* 跨语言，支持C/C++，Python。
+* 跨平台，支持Windows，Linux，MacOS，Jetson，树莓派等。
+* 跨语言，支持C/C++，Python。***跨平台使用时支持不同终端运行不同语言***。
 
 ### 2.快速开始
 
@@ -44,7 +44,7 @@ git clone https://github.com/BestAnHongjun/PicSocket.git
 编译并安装。
 
 ```sh
-cd PicSocket
+cd ~/PicSocket
 mkdir build
 cd build
 cmake ..
@@ -57,21 +57,21 @@ make install # 不会安装到系统目录，安装到项目的install目录
 |-install
     |- include  # C/C++头文件
     |- lib      # 链接库
-    |- example  # 一个简易的demo
+    |- cpp      # 一个简易的demo
 ```
 
 将`include`文件夹和`lib`文件夹拷贝到你自己的工程中即可使用。
 
 #### (3)在自定义工程中使用`PicSocket`
 
-为了演示使用方法，我们假设`example`就是您的工程目录。
+为了演示使用方法，我们假设`cpp`就是您的工程目录。
 
-在您的工程目录下创建源码文件，如[picsocket_sender.cpp](./example/picsocket_sender.cpp)、[picsocket_receiver.cpp](./example/picsocket_receiver.cpp)。创建CMake文件，如[CMakeLists.txt](./example/CMakeLists.txt)。
+在您的工程目录下创建源码文件，如[picsocket_sender.cpp](./example/cpp/picsocket_sender.cpp)、[picsocket_receiver.cpp](./example/cpp/picsocket_receiver.cpp)。创建CMake文件，如[CMakeLists.txt](./example/cpp/CMakeLists.txt)。
 
 随后编译您的工程。
 
 ```sh
-cd ~/PicSocket/install/example # 进入您的工程目录
+cd ~/PicSocket/install/cpp # 进入您的工程目录
 mkdir build     # 创建编译目录
 cd build
 cmake ..
@@ -91,4 +91,65 @@ make -j4
 ```
 
 </details>
+
+<details>
+<summary>Python快速开始</summary>
+
+#### (1)安装依赖项：
+请确保您的机器已安装CMake及C/C++编译器工具链。
+
+安装OpenCV库：
+> Jetson平台
+```sh
+# Jetson平台JetPack已预装OpenCV库，无需操作。
+```
+
+> Ubuntu/树莓派/香橙派
+```sh
+sudo apt-get install libopencv-dev
+```
+
+> MacOS
+```sh
+brew install opencv
+```
+#### (2)编译安装
+克隆本仓库。
+```sh
+cd ~
+git clone https://github.com/BestAnHongjun/PicSocket.git
+```
+
+编译并安装。
+
+```sh
+cd ~/PicSocket
+mkdir build
+cd build
+cmake .. -DPYTHON_BUILD=TRUE
+make -j4
+```
+
+安装Python模块。
+
+```sh
+cd ~/PicSocket
+pip3 install -e .
+```
+
+#### (3)在自定义工程中使用`PicSocket`
+
+作为一个简单示例，您可以复制并创建[picsocket_sender.py](./example/python/picsocket_sender.py)、[picsocket_receiver.py](./example/python/picsocket_receiver.py)，并运行他们。
+
+> **注意**：运行本demo时，请确保您的发送端设备安装有摄像头，并可由`cv2.VideoCapture(0)`正常读取。
+
+```sh
+# 由8888端口接受图片流
+python3 picsocket_receiver 8888
+
+# 向127.0.0.0:8888发送图片流
+python3 picsocket_sender 127.0.0.1 8888
+```
+
+<details>
 

@@ -60,5 +60,9 @@ install(FILES
     ${INSTALL_INCLUDE_DIR})
 install(TARGETS picsocket DESTINATION ${INSTALL_LIB_DIR})
 
-install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/example 
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/example/cpp
         DESTINATION ${INSTALL_DIR})
+
+if(PYTHON_BUILD)
+    add_subdirectory(picsocket)
+endif()
