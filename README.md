@@ -1,7 +1,7 @@
 # PicSocket：轻量级局域网跨平台图传
 
 <div align="center">
-<img src="./attach/logo.jpg" width="800px">
+<img src="./attach/logo.jpg" width="500px">
 </div>
 
 ### 1.特性
