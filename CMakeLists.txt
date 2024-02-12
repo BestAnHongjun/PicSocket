@@ -9,7 +9,9 @@ project(PicSocket)
 include_directories(include)
 
 # Set C++11 standard
-add_definitions(-std=c++11)
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3 -fPIC")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -O3 -fPIC")
+set(CMAKE_CXX_STANDARD 11)
 
 # add 3rdparty library
 find_package(OpenCV)
