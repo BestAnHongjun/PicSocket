@@ -2,6 +2,6 @@
 # Email: an.hongjun@foxmail.com
 # Page: www.anhongjun.top
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 
 from picsocket.picsocket import ImgSender, ImgReceiver
